@@ -40,7 +40,9 @@
   "build": {
     "appId": "com.bitbof.klecks",
     "productName": "Klecks",
-    "main": "electron/main.js",
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
     "files": [
       "dist/**/*",
       "electron/**/*",
@@ -52,10 +54,12 @@
     "mac": {
       "category": "public.app-category.graphics-design",
       "icon": "src/app/img/klecks-icon.png",
-      "target": [
-        "dmg",
-        "zip"
-      ]
+      "target": {
+        "target": "default",
+        "arch": [
+          "universal"
+        ]
+      }
     },
     "win": {
       "icon": "src/app/img/klecks-icon.png",
