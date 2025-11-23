@@ -53,7 +53,7 @@
     },
     "mac": {
       "category": "public.app-category.graphics-design",
-      "icon": "src/app/img/klecks-icon.png",
+      "icon": "src/app/img/klecks-icon-512-512.png",
       "target": {
         "target": "default",
         "arch": [
@@ -62,11 +62,11 @@
       }
     },
     "win": {
-      "icon": "src/app/img/klecks-icon.png",
+      "icon": "src/app/img/klecks-icon-512-512.png",
       "target": "nsis"
     },
     "linux": {
-      "icon": "src/app/img/klecks-icon.png",
+      "icon": "src/app/img/klecks-icon-512-512.png",
       "category": "Graphics",
       "target": [
         "AppImage",

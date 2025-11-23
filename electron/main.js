@@ -10,7 +10,7 @@ function createWindow() {
       contextIsolation: true,
       webgl: true,
     },
-    icon: path.join(__dirname, '../src/app/img/klecks-icon-512-512.png'),
+    icon: path.join(__dirname, '../src/app/img/klecks-icon.png'),
   });
 
   // In development, load from dev server
