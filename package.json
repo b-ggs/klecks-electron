@@ -1,4 +1,6 @@
 {
+  "name": "klecks",
+  "version": "0.9.10.2",
   "type": "module",
   "browserslist": [
     "> 0.2%",
