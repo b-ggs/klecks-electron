@@ -43,10 +43,13 @@
     "extraMetadata": {
       "main": "electron/main.js"
     },
+    "npmRebuild": false,
+    "buildDependenciesFromSource": false,
     "files": [
       "dist/**/*",
       "electron/**/*",
-      "!dist/*.map"
+      "!dist/*.map",
+      "!node_modules/**/*"
     ],
     "directories": {
       "output": "release"
@@ -54,12 +57,10 @@
     "mac": {
       "category": "public.app-category.graphics-design",
       "icon": "src/app/img/klecks-icon-512-512.png",
-      "target": {
-        "target": "default",
-        "arch": [
-          "universal"
-        ]
-      }
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
       "icon": "src/app/img/klecks-icon-512-512.png",
