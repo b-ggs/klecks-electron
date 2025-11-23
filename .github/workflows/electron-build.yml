@@ -1,0 +1,73 @@
+name: Build Electron App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate language files
+        run: npm run lang:build
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Install Electron binary (macOS/Linux)
+        if: runner.os != 'Windows'
+        run: node node_modules/electron/install.js
+
+      - name: Install Electron binary (Windows)
+        if: runner.os == 'Windows'
+        run: node node_modules/electron/install.js
+        shell: cmd
+
+      - name: Package Electron app (macOS)
+        if: runner.os == 'macOS'
+        run: npm run electron:build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package Electron app (Windows)
+        if: runner.os == 'Windows'
+        run: npm run electron:build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload macOS artifacts
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: klecks-macos
+          path: |
+            release/*.dmg
+            release/*.zip
+
+      - name: Upload Windows artifacts
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: klecks-windows
+          path: |
+            release/*.exe
